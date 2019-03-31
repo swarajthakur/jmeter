@@ -1,0 +1,11 @@
+{
+	"tests": [
+		{
+			"target_host": "www.sky.com",
+			"target_path": "/",
+			"target_keyword": "Sky",
+			"target_vusers": "5",
+			"target_duration": "60"
+		}
+	]
+}
