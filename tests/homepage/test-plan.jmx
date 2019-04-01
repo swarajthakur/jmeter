@@ -13,7 +13,7 @@
     </TestPlan>
     <hashTree>
       <SetupThreadGroup guiclass="SetupThreadGroupGui" testclass="SetupThreadGroup" testname="setUp Thread Group" enabled="true">
-        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+        <stringProp name="ThreadGroup.on_sample_error">stoptest</stringProp>
         <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
           <boolProp name="LoopController.continue_forever">false</boolProp>
           <stringProp name="LoopController.loops">1</stringProp>
@@ -85,18 +85,18 @@
           </JSONPostProcessor>
           <hashTree/>
         </hashTree>
-      </hashTree>
-      <BeanShellAssertion guiclass="BeanShellAssertionGui" testclass="BeanShellAssertion" testname="BeanShell Assertion" enabled="true">
-        <stringProp name="BeanShellAssertion.query">${__setProperty(target_path, ${TARGET_PATH})};
+        <BeanShellAssertion guiclass="BeanShellAssertionGui" testclass="BeanShellAssertion" testname="BeanShell Assertion" enabled="true">
+          <stringProp name="BeanShellAssertion.query">${__setProperty(target_path, ${TARGET_PATH})};
 ${__setProperty(target_host, ${TARGET_HOST})};
 ${__setProperty(target_keyword, ${TARGET_KEYWORD})};
 ${__setProperty(target_vusers, ${TARGET_VUSERS})};
 ${__setProperty(target_duration, ${TARGET_DURATION})};</stringProp>
-        <stringProp name="BeanShellAssertion.filename"></stringProp>
-        <stringProp name="BeanShellAssertion.parameters"></stringProp>
-        <boolProp name="BeanShellAssertion.resetInterpreter">false</boolProp>
-      </BeanShellAssertion>
-      <hashTree/>
+          <stringProp name="BeanShellAssertion.filename"></stringProp>
+          <stringProp name="BeanShellAssertion.parameters"></stringProp>
+          <boolProp name="BeanShellAssertion.resetInterpreter">true</boolProp>
+        </BeanShellAssertion>
+        <hashTree/>
+      </hashTree>
       <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Scenario 1" enabled="true">
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
         <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
@@ -109,40 +109,20 @@ ${__setProperty(target_duration, ${TARGET_DURATION})};</stringProp>
         <longProp name="ThreadGroup.end_time">1373789594000</longProp>
         <boolProp name="ThreadGroup.scheduler">true</boolProp>
         <stringProp name="ThreadGroup.duration">${__property(target_duration)}</stringProp>
-        <stringProp name="ThreadGroup.delay">5</stringProp>
+        <stringProp name="ThreadGroup.delay">0</stringProp>
         <stringProp name="TestPlan.comments">Virtual Users Running Scenario 1. 
 Make test last 1 minute (see Scheduler)</stringProp>
       </ThreadGroup>
       <hashTree>
-        <Arguments guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
-          <collectionProp name="Arguments.arguments">
-            <elementProp name="TARGET_PATH" elementType="Argument">
-              <stringProp name="Argument.name">TARGET_PATH</stringProp>
-              <stringProp name="Argument.value">${__property(target_path)}</stringProp>
-              <stringProp name="Argument.metadata">=</stringProp>
-            </elementProp>
-            <elementProp name="TARGET_HOST" elementType="Argument">
-              <stringProp name="Argument.name">TARGET_HOST</stringProp>
-              <stringProp name="Argument.value">${__property(target_host)}</stringProp>
-              <stringProp name="Argument.metadata">=</stringProp>
-            </elementProp>
-            <elementProp name="TARGET_KEYWORD" elementType="Argument">
-              <stringProp name="Argument.name">TARGET_KEYWORD</stringProp>
-              <stringProp name="Argument.value">${__property(target_keyword)}</stringProp>
-              <stringProp name="Argument.metadata">=</stringProp>
-            </elementProp>
-          </collectionProp>
-        </Arguments>
-        <hashTree/>
         <ConfigTestElement guiclass="HttpDefaultsGui" testclass="ConfigTestElement" testname="HTTP Request Defaults" enabled="true">
           <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
             <collectionProp name="Arguments.arguments"/>
           </elementProp>
-          <stringProp name="HTTPSampler.domain">${TARGET_HOST}</stringProp>
+          <stringProp name="HTTPSampler.domain">${__property(target_host)}</stringProp>
           <stringProp name="HTTPSampler.port"></stringProp>
           <stringProp name="HTTPSampler.protocol">https</stringProp>
           <stringProp name="HTTPSampler.contentEncoding"></stringProp>
-          <stringProp name="HTTPSampler.path">${TARGET_PATH}</stringProp>
+          <stringProp name="HTTPSampler.path">${__property(target_path)}</stringProp>
           <stringProp name="TestPlan.comments">Notice Timeouts:
 Read to 30s
 Connect to 5s</stringProp>
@@ -173,7 +153,7 @@ Connect to 5s</stringProp>
         <hashTree>
           <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Test-Keyword" enabled="true">
             <collectionProp name="Asserion.test_strings">
-              <stringProp name="-1283727093">${TARGET_KEYWORD}</stringProp>
+              <stringProp name="464391115">${__property(target_keyword)}</stringProp>
             </collectionProp>
             <stringProp name="Assertion.test_field">Assertion.response_data</stringProp>
             <boolProp name="Assertion.assume_success">false</boolProp>
